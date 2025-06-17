@@ -1,0 +1,11 @@
+C:\Users\Matvey\Desktop\Airport\Airport\bin\Debug\Airport.exe.config
+C:\Users\Matvey\Desktop\Airport\Airport\bin\Debug\Airport.exe
+C:\Users\Matvey\Desktop\Airport\Airport\bin\Debug\Airport.pdb
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.csproj.AssemblyReference.cache
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.Properties.Resources.resources
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.csproj.GenerateResource.cache
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.csproj.CoreCompileInputs.cache
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.exe
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.pdb
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.csproj.ResolveComReference.cache
+C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.Form1.resources

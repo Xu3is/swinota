@@ -1,0 +1,1 @@
+DESKTOP-KDS9A4G;Initial Catalog=Аэропорт;Integrated Security=True

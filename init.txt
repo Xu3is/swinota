@@ -1,0 +1,140 @@
+
+
+-- Удаление существующих таблиц, если они есть (в обратном порядке из-за зависимостей)
+DROP TABLE IF EXISTS Обслуживание_рейсов;
+DROP TABLE IF EXISTS Билеты;
+DROP TABLE IF EXISTS Рейсы;
+DROP TABLE IF EXISTS Самолёты;
+DROP TABLE IF EXISTS Выходы;
+DROP TABLE IF EXISTS Терминалы;
+DROP TABLE IF EXISTS Авиакомпании;
+DROP TABLE IF EXISTS Пассажиры;
+DROP TABLE IF EXISTS Сотрудники;
+DROP TABLE IF EXISTS Аэропорты;
+
+CREATE TABLE Аэропорты (
+    Код_Аэропорта INT PRIMARY KEY IDENTITY(1,1),
+    Название_аэропорта NVARCHAR(100) NOT NULL,
+    Город NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Терминалы (
+    Код_Терминала INT PRIMARY KEY IDENTITY(1,1),
+    Код_Аэропорта INT FOREIGN KEY REFERENCES Аэропорты(Код_Аэропорта),
+    Название_терминала NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Выходы (
+    Код_Выхода INT PRIMARY KEY IDENTITY(1,1),
+    Код_Терминала INT FOREIGN KEY REFERENCES Терминалы(Код_Терминала),
+    Номер_выхода NVARCHAR(10) NOT NULL
+);
+
+CREATE TABLE Авиакомпании (
+    Код_Авиакомпании INT PRIMARY KEY IDENTITY(1,1),
+    Название_авиакомпании NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Самолёты (
+    Код_Самолёта INT PRIMARY KEY IDENTITY(1,1),
+    Код_Авиакомпании INT FOREIGN KEY REFERENCES Авиакомпании(Код_Авиакомпании),
+    Вместимость INT NOT NULL
+);
+
+CREATE TABLE Рейсы (
+    Код_Рейса INT PRIMARY KEY IDENTITY(1,1),
+    Номер_Рейса NVARCHAR(20) NOT NULL,
+    Город_Вылета NVARCHAR(100) NOT NULL,
+    Город_Прилета NVARCHAR(100) NOT NULL,
+    Время_Вылета DATETIME NOT NULL,
+    Время_Прилета DATETIME NOT NULL,
+    Код_Самолёта INT FOREIGN KEY REFERENCES Самолёты(Код_Самолёта),
+    Код_Выхода INT FOREIGN KEY REFERENCES Выходы(Код_Выхода)
+);
+
+CREATE TABLE Пассажиры (
+    Код_Пассажира INT PRIMARY KEY IDENTITY(1,1),
+    Имя NVARCHAR(100) NOT NULL,
+    Национальность NVARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Сотрудники (
+    Код_Сотрудника INT PRIMARY KEY IDENTITY(1,1),
+    Имя NVARCHAR(100) NOT NULL,
+    Фамилия NVARCHAR(100) NOT NULL,
+    Зарплата DECIMAL(10,2) NOT NULL,
+    Должность NVARCHAR(50) NOT NULL,
+    Уровень_доступа INT NOT NULL DEFAULT 1,
+    Пароль NVARCHAR(50) NOT NULL DEFAULT 'defaultpassword',
+    Дата_отпуска DATETIME,
+    День_выплаты_зарплаты INT
+);
+
+CREATE TABLE Билеты (
+    Код_Билета INT PRIMARY KEY IDENTITY(1,1),
+    Код_Рейса INT FOREIGN KEY REFERENCES Рейсы(Код_Рейса),
+    Код_Пассажира INT FOREIGN KEY REFERENCES Пассажиры(Код_Пассажира),
+    Номер_Места NVARCHAR(10) NOT NULL,
+    Цена DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE Обслуживание_рейсов (
+    Код_Обслуживания INT PRIMARY KEY IDENTITY(1,1),
+    Код_Рейса INT FOREIGN KEY REFERENCES Рейсы(Код_Рейса),
+    Код_Сотрудника INT FOREIGN KEY REFERENCES Сотрудники(Код_Сотрудника)
+);
+
+-- Заполнение таблиц
+-- Аэропорты
+INSERT INTO Аэропорты (Название_аэропорта, Город) VALUES
+(N'Пулково', N'Санкт-Петербург'),
+(N'Шереметьево', N'Москва');
+-- Проверка созданных Код_Аэропорта
+SELECT Код_Аэропорта FROM Аэропорты; -- Для отладки
+
+-- Терминалы
+INSERT INTO Терминалы (Код_Аэропорта, Название_терминала) VALUES
+(1, N'Терминал 1'), -- Соответствует Код_Аэропорта из Аэропорты
+(2, N'Терминал D'); -- Соответствует Код_Аэропорта из Аэропорты
+-- Проверка созданных Код_Терминала
+SELECT Код_Терминала, Код_Аэропорта FROM Терминалы; -- Для отладки
+
+-- Выходы
+INSERT INTO Выходы (Код_Терминала, Номер_выхода) VALUES
+(1, N'A1'),
+(2, N'D5');
+
+-- Авиакомпании
+INSERT INTO Авиакомпании (Название_авиакомпании) VALUES
+(N'Аэрофлот'),
+(N'Сибирь');
+
+-- Самолёты
+INSERT INTO Самолёты (Код_Авиакомпании, Вместимость) VALUES
+(1, 200),
+(2, 150);
+
+-- Рейсы
+INSERT INTO Рейсы (Номер_Рейса, Город_Вылета, Город_Прилета, Время_Вылета, Время_Прилета, Код_Самолёта, Код_Выхода) VALUES
+(N'SU123', N'Санкт-Петербург', N'Москва', '20250618 09:00:00', '20250618 11:00:00', 1, 1),
+(N'S7456', N'Санкт-Петербург', N'Екатеринбург', '20250618 12:00:00', '20250618 15:00:00', 2, 1);
+
+-- Пассажиры
+INSERT INTO Пассажиры (Имя, Национальность) VALUES
+(N'Мария Смирнова', N'Россия'),
+(N'Петр Кузнецов', N'Украина');
+
+-- Сотрудники (включая Дениса Сухачева и Матвея Лелюкова)
+INSERT INTO Сотрудники (Имя, Фамилия, Зарплата, Должность, Уровень_доступа, Пароль, Дата_отпуска, День_выплаты_зарплаты) VALUES
+(N'Денис', N'Сухачев', 13.00, 'Уборщик', 1, N'denis', '20250620', 15), -- Денис Сухачев с паролем denis
+(N'Матвей', N'Лелюков', 50000.00, 'Администратор', 0, N'админ', '20250701', 1); -- Матвей Лелюков как админ с паролем админ
+
+-- Билеты
+INSERT INTO Билеты (Код_Рейса, Код_Пассажира, Номер_Места, Цена) VALUES
+(1, 1, N'12А', 12000.00),
+(2, 2, N'5B', 9000.00);
+
+-- Обслуживание_рейсов
+INSERT INTO Обслуживание_рейсов (Код_Рейса, Код_Сотрудника) VALUES
+(1, 1),
+(2, 1);
