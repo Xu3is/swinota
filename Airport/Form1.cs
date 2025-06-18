@@ -10,7 +10,7 @@ namespace Airport
 {
     public partial class Form1 : Form
     {
-        private string connectionString = @"Data Source=DESKTOP-KDS9A4G;Initial Catalog=ПОРТ;Integrated Security=True";
+        private string connectionString = @"Data Source=ADCLG1;Initial Catalog=ПОРТ;Integrated Security=True";
         private DataGridView dataGridView;
         private Button[] categoryButtons;
         private Button[] tableButtons;

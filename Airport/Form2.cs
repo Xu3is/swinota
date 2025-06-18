@@ -9,7 +9,7 @@ namespace Airport
 {
     public partial class Form2 : Form
     {
-        private string connectionString = @"Data Source=DESKTOP-KDS9A4G;Initial Catalog=ПОРТ;Integrated Security=True";
+        private string connectionString = @"Data Source=ADCLG1;Initial Catalog=ПОРТ;Integrated Security=True";
         private DataGridView dataGridViewTickets;
         private Button btnRegister;
         private Random random = new Random();
@@ -123,21 +123,13 @@ namespace Airport
             TextBox txtFamily = new TextBox { Location = new Point(150, 60), Width = 200, Font = new Font("Arial", 14) };
             Label lblPassport = new Label { Text = "Паспорт:", Location = new Point(20, 100), Font = new Font("Arial", 14) };
             TextBox txtPassport = new TextBox { Location = new Point(150, 100), Width = 200, Font = new Font("Arial", 14) };
-            Label lblEmail = new Label { Text = "Электронная почта:", Location = new Point(20, 140), Font = new Font("Arial", 14) };
+            Label lblEmail = new Label { Text = "Почта:", Location = new Point(20, 140), Font = new Font("Arial", 14) };
             TextBox txtEmail = new TextBox { Location = new Point(150, 140), Width = 200, Font = new Font("Arial", 14) };
-            Button btnSubmit = new Button { Text = "Подтвердить", Location = new Point(150, 200), Width = 100, Font = new Font("Arial", 16, FontStyle.Bold) };
+            Button btnSubmit = new Button { Text = "Подтвердить", Location = new Point(150, 200), Width = 200, Height=100, Font = new Font("Arial", 16, FontStyle.Bold) };
 
             btnSubmit.Click += (s, ev) =>
             {
-                // Валидация паспорта (например, формат 4 цифры пробел 6 цифр)
-                string passportPattern = @"^\d{4}\s\d{6}$";
-                if (!Regex.IsMatch(txtPassport.Text, passportPattern))
-                {
-                    MessageBox.Show("Неверный формат паспорта! Ожидается: 1234 567890.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
 
-                // Валидация email (простая проверка)
                 string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
                 if (!Regex.IsMatch(txtEmail.Text, emailPattern))
                 {
@@ -159,7 +151,7 @@ namespace Airport
 
                         // Вставка в таблицу Пассажиры
                         string passengerInsertQuery = @"
-                            INSERT INTO Пассажиры (Имя, Фамилия, Паспорт, Электронная_Почта)
+                            INSERT INTO Пассажиры (Имя, Фамилия, Номер_паспорта, Электронная_Почта)
                             VALUES (@Name, @Family, @Passport, @Email)";
                         using (SqlCommand cmdPassenger = new SqlCommand(passengerInsertQuery, connection))
                         {

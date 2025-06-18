@@ -9,3 +9,14 @@ C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.exe
 C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.pdb
 C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.csproj.ResolveComReference.cache
 C:\Users\Matvey\Desktop\Airport\Airport\obj\Debug\Airport.Form1.resources
+C:\Users\3291922-25\Desktop\swinota\Airport\bin\Debug\Airport.exe.config
+C:\Users\3291922-25\Desktop\swinota\Airport\bin\Debug\Airport.exe
+C:\Users\3291922-25\Desktop\swinota\Airport\bin\Debug\Airport.pdb
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.csproj.AssemblyReference.cache
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.csproj.ResolveComReference.cache
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.Form1.resources
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.Properties.Resources.resources
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.csproj.GenerateResource.cache
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.csproj.CoreCompileInputs.cache
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.exe
+C:\Users\3291922-25\Desktop\swinota\Airport\obj\Debug\Airport.pdb
